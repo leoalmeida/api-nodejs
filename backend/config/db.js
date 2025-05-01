@@ -1,28 +1,25 @@
 const mongoose = require('mongoose');
 
+
 const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
     MONGO_HOSTNAME,
-    MONGO_PORT,
-    MONGO_DB
-  } = process.env;
+    MONGO_DB,
+    MONGO_URL
+} = process.env;
 
-main().catch(err => console.log(err));
-
-async function main() {
-    const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
-    const options = {
-        useNewUrlParser: true,
-        reconnectTries: Number.MAX_VALUE,
-        reconnectInterval: 500,
-        connectTimeoutMS: 10000,
-    };
-    await mongoose.connect(url, options)
-            .then( function() {
-                console.log('MongoDB is connected');
-            })
-                .catch( function(err) {
-                console.log(err);
-            })
+function main () {
+    try {
+        //const url = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority&appName=ClusterLeo`
+        const url = `${MONGO_URL}`
+        //const url = `mongodb+srv://api-nodejs:8VNergbNwt06HL7R@clusterleo.sckgivp.mongodb.net/db?retryWrites=true&w=majority&appName=ClusterLeo`
+        mongoose.connect(url);
+    } catch (error) {
+        console.error("Mongoose connection or check failed:", error);
+    } finally {
+        console.error("Finally");
+    }
 }
+
+main();

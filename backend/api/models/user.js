@@ -13,41 +13,54 @@ module.exports = app => {
         state :  { type: String, required: true },
         createdAt :  { type: String, required: true },
     });
-
-    const userModel = mongoose.model('User', User);
-
-    userModel.create({
-        "id": "admin",
-        "name": "Cliente 149501",
-        "birthDate": "1966-10-23T03:00:00Z",
-        "phone": "(32)11111111",
-        "email": "email@email.com.br",
-        "occupation": "Medico",
-        "state": "SP",
-        "createdAt": new Date()
+    const model = mongoose.model('User', User);
+    model.exists({}).then((users) => {
+      if (users) return;
+      console.log('Criando dados iniciais de usuários');
+      
+      model.create({
+          "id": "admin",
+          "name": "Cliente 149501",
+          "birthDate": "1966-10-23T03:00:00Z",
+          "phone": "(32)11111111",
+          "email": "email@email.com.br",
+          "occupation": "Medico",
+          "state": "SP",
+          "createdAt": new Date()
       }).then(() => console.log('user1'));
-    userModel.create({
-        "id": uuid.v4(),
-        "name": "Cliente 252",
-        "birthDate": "1989-10-23T03:00:00Z",
-        "phone": "(32)11111111",
-        "email": "email@email.com.br",
-        "occupation": "Analista de Sistemas",
-        "state": "SP",
-        "createdAt": new Date()
+      model.create({
+          "id": uuid.v4(),
+          "name": "Cliente 252",
+          "birthDate": "1989-10-23T03:00:00Z",
+          "phone": "(32)11111111",
+          "email": "email@email.com.br",
+          "occupation": "Analista de Sistemas",
+          "state": "SP",
+          "createdAt": new Date()
       }).then(() => console.log('user2'));
-    userModel.create({
-        "id": uuid.v4(),
-        "name": "Cliente 252",
-        "birthDate": "1989-10-23T03:00:00Z",
-        "phone": "(32)11111111",
-        "email": "email@email.com.br",
-        "occupation": "Engenheiro",
-        "state": "SP",
-        "createdAt": new Date()
+      model.create({
+          "id": uuid.v4(),
+          "name": "Cliente 252",
+          "birthDate": "1989-10-23T03:00:00Z",
+          "phone": "(32)11111111",
+          "email": "email@email.com.br",
+          "occupation": "Engenheiro",
+          "state": "SP",
+          "createdAt": new Date()
       }).then(() => console.log('user3'));
-
-
-    return userModel;
+    });
+        
+    async function checkCollectionExistence(collectionName) {
+      try {
+          if (!mongoose.connection.db) return;
+          const collections = await mongoose.connection.db.listCollections().toArray();
+          const collectionExists = collections.some(collection => collection.name === collectionName);
+          return collectionExists;
+      } catch (error) {
+          console.error("Error checking collection existence:", error);
+          throw error;
+      }
+    }
+    return model;
 
 }

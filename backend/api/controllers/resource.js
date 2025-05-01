@@ -70,5 +70,7 @@ module.exports = app => {
                   resources: req.params.regid,
                 }));
   
+    
+    
     return controller;
   }
