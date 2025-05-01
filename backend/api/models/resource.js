@@ -2,7 +2,7 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-module.exports = app => {
+module.exports = () => {
     const Resource = new Schema ({
         id :  { type: String, required: true },
         name : { type: String, required: true },

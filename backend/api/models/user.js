@@ -2,7 +2,7 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-module.exports = app => {
+module.exports = () => {
     const User = new Schema ({
         id :  { type: String, required: true },
         name : { type: String, required: true },
@@ -49,18 +49,7 @@ module.exports = app => {
           "createdAt": new Date()
       }).then(() => console.log('user3'));
     });
-        
-    async function checkCollectionExistence(collectionName) {
-      try {
-          if (!mongoose.connection.db) return;
-          const collections = await mongoose.connection.db.listCollections().toArray();
-          const collectionExists = collections.some(collection => collection.name === collectionName);
-          return collectionExists;
-      } catch (error) {
-          console.error("Error checking collection existence:", error);
-          throw error;
-      }
-    }
+    
     return model;
 
 }

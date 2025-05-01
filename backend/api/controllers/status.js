@@ -5,21 +5,21 @@ module.exports = app => {
     controller.list = (req, res) => 
         Resource.find({}, 'id status')
         .then((resources) => res.status(200).json(resources))
-        .catch((err) => res.status(404).json({
+        .catch(() => res.status(404).json({
           message: 'Nenhum recurso foi encontrado.',
           success: false
         }));
     controller.getOne = (req, res) => 
         Resource.findOne({ id: req.params.regid }, 'id status')
         .then((resource) => res.status(200).json(resource))
-        .catch((err) => res.status(404).json({
+        .catch(() => res.status(404).json({
             message: 'Recurso não encontrado.',
             success: false,
             resources: req.params.regid,
         }));
     
     controller.update = (req, res) => 
-        User.findOneAndUpdate({ id: req.params.regid },
+        Resource.findOneAndUpdate({ id: req.params.regid },
                 {status: req.body.status,
                 lastModifiedBy: req.body.userid,
                 lastModifiedAt: new Date()})
@@ -29,7 +29,7 @@ module.exports = app => {
           success: true,
           resources: recurso,
         }))
-        .catch((err) =>  
+        .catch(() =>  
         res.status(404).json({
           message: 'Recurso não encontrado.',
           success: false,
