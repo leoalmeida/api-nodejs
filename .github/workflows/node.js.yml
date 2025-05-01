@@ -36,8 +36,5 @@ jobs:
         
   docker:
     needs: test
-    defaults:
-      run:
-        working-directory: 'backend'
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
