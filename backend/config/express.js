@@ -1,24 +1,27 @@
 
 const express    = require('express');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger.json');
 const config     = require('config');
 const consign    = require('consign');
+const db = require('./db');
 
 module.exports = () => {
   const app = express();
 
-  // SETANDO VARIÁVEIS DA APLICAÇÃO
+  // Variáveis da aplicação
   app.set('port', process.env.PORT || config.get('server.port'));
 
-  // MIDDLEWARES
   app.use(bodyParser.json());
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-  //ENDPOINTS
+  //configuração dos endpoints
   consign({cwd: 'api'})
-    .then('data')
-    .then('controllers')
-    .then('routes')
-    .into(app);
+  .then('models')
+  .then('controllers')
+  .then('routes')
+  .into(app);
 
   return app;
 };

@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api-nodejs",
+    "description": "Projeto de exemplo..."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{regid}": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1212323"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jhon Doe"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "resource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1212323"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jhon Doe"
+          },
+          "type": {
+            "type": "string",
+            "example": "hub"
+          },
+          "status": {
+            "type": "string",
+            "example": "running"
+          }
+        }
+      },
+      "status": {
+        "type": "object",
+        "properties": {
+          "resid": {
+            "type": "string",
+            "example": "221212"
+          },
+          "status": {
+            "type": "string",
+            "example": "running"
+          }
+        }
+      },
+      "statusEnum": {
+        "type": "string",
+        "enum": [
+          "running",
+          "stopped",
+          "failed"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
