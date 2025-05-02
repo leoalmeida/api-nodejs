@@ -1,5 +1,12 @@
 {
     "server": {
-        "port" : 3000
+        "port" : 3000,
+        "db" : {
+            "url": "mongodb+srv://api-nodejs:8VNergbNwt06HL7R@clusterleo.sckgivp.mongodb.net/db?retryWrites=true&w=majority&appName=ClusterLeo",
+            "username": "api-nodejs",
+            "password": "8VNergbNwt06HL7R",
+            "hostname": "clusterleo.sckgivp.mongodb.net",
+            "db": "db"
+        }
     }
 }

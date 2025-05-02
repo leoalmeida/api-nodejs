@@ -1,27 +1,30 @@
-
 const express    = require('express');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
-const config     = require('config');
-const consign    = require('consign');
+const config = require('config')
 const db = require('./db');
 
-module.exports = () => {
-  const app = express();
+// Inicializando a aplicação Express
+const app = express();
 
-  // Variáveis da aplicação
-  app.set('port', process.env.PORT || config.get('server.port'));
+// Importando as rotas da aplicação relacionadas às tarefas
+const resourceRoutes = require('../api/routes/resourceRoutes');
+const statusRoutes = require('../api/routes/statusRoutes');
+const userRoutes = require('../api/routes/userRoutes');
 
-  app.use(bodyParser.json());
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+// Definindo variáveis que o servidor deverá usar
+app.set('port', process.env.PORT || config.get('server.port'));
+app.set('db_url', process.env.DATABASE_URL || config.get('server.db.url'));
 
-  //configuração dos endpoints
-  consign({cwd: 'api'})
-  .then('models')
-  .then('controllers')
-  .then('routes')
-  .into(app);
+db.connect(app.get('db_url'));
 
-  return app;
-};
+// Configurando as rotas disponibilizadas pela aplicação
+app.use('/api/v1', resourceRoutes);
+app.use('/api/v1', statusRoutes);
+app.use('/api/v1', userRoutes);
+
+app.use(bodyParser.json());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+module.exports = app;

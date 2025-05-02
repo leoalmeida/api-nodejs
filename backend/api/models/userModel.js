@@ -1,0 +1,52 @@
+// Definição de um modelo de Usuário 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const schema = new Schema ({
+    name : { type: String, required: true },
+    birthDate :  { type: String, required: true },
+    phone :  { type: String, required: true },
+    email :  { type: String, required: true },
+    occupation :  { type: String, required: true },
+    state :  { type: String, required: true },
+    createdAt :  { type: String, required: true },
+});
+const model = mongoose.model('User', schema);
+
+// Criação de recrusos iniciais na tabela para testes
+/*model.exists({}).then((users) => {
+    if (users) return;
+    console.log('Criando dados iniciais de usuários');
+    
+    model.create({
+        "name": "Cliente 149501",
+        "birthDate": "1966-10-23T03:00:00Z",
+        "phone": "(32)11111111",
+        "email": "email@email.com.br",
+        "occupation": "Medico",
+        "state": "SP",
+        "createdAt": new Date()
+    }).then(() => console.log('user1'));
+    model.create({
+        "name": "Cliente 252",
+        "birthDate": "1989-10-23T03:00:00Z",
+        "phone": "(32)11111111",
+        "email": "email@email.com.br",
+        "occupation": "Analista de Sistemas",
+        "state": "SP",
+        "createdAt": new Date()
+    }).then(() => console.log('user2'));
+    model.create({
+        "name": "Cliente 252",
+        "birthDate": "1989-10-23T03:00:00Z",
+        "phone": "(32)11111111",
+        "email": "email@email.com.br",
+        "occupation": "Engenheiro",
+        "state": "SP",
+        "createdAt": new Date()
+    }).then(() => console.log('user3'));
+});*/
+
+
+// Exportando o model utilizado pelos controllers
+module.exports = { model, schema };

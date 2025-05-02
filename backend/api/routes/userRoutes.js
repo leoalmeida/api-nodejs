@@ -12,16 +12,22 @@
  * - GET /:regid: Retrieves a single user by their registration ID.
  */
 
-module.exports = app => {
-    const controller = app.controllers.user;
-    // User api route.
-    app.route("/api/v1/user")
-        .get(controller.list)
-        .post(controller.save);
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
 
-    app.route('/api/v1/user/:regid')
-        .delete(controller.remove)
-        .put(controller.update)
-        .get(controller.getOne);
+// Rotas para operações CRUD de recursos
 
-}
+// User api route.
+router.route("/user")
+    .get(userController.listarItems)
+    .post(userController.saveItem);
+
+router.route('/user/:id')
+    .delete(userController.removeItem)
+    .put(userController.updateItem)
+    .get(userController.getOneItem);
+
+
+module.exports = router;
+

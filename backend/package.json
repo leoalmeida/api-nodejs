@@ -4,9 +4,9 @@
   "description": "Example of routes",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watch --verbose",
+    "test": "NODE_ENV=test && jest",
     "lint": "eslint api",
-    "dev": "nodemon --env-file=.env server",
+    "dev": "NODE_ENV=development && node server.js",
     "swagger": "node --env-file=.env swagger.js"
   },
   "jest": {
@@ -28,11 +28,9 @@
   "dependencies": {
     "body-parser": "^2.2.0",
     "config": "^3.3.12",
-    "consign": "^0.1.6",
     "express": "^5.1.0",
     "mongoose": "^8.14.1",
-    "swagger-ui-express": "^5.0.1",
-    "uuid": "^11.1.0"
+    "swagger-ui-express": "^5.0.1"
   },
   "keywords": [],
   "devDependencies": {
@@ -40,6 +38,7 @@
     "eslint": "^9.25.1",
     "globals": "^16.0.0",
     "jest": "^29.7.0",
+    "mockingoose": "^2.16.2",
     "nodemon": "^3.1.10",
     "supertest": "^7.1.0",
     "swagger-autogen": "^2.23.7"
