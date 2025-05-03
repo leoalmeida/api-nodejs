@@ -150,7 +150,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": "2019-10-18T16:37:58.979Z",
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     }];
     mockingoose(user.model).toReturn(_user, 'findOneAndDelete');
 
