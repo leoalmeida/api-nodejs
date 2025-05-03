@@ -3,12 +3,7 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - MONGO_USERNAME=$MONGO_USERNAME
-      - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=db
-      - MONGO_PORT=$MONGO_PORT
-      - MONGO_DB=$MONGO_DB 
-      - MONGO_URL=$MONGO_URL 
+      - DATABASE_URL=$DATABASE_URL
     build:
       context: backend
       dockerfile: Dockerfile
@@ -18,3 +13,22 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      target: development
+    image: leoalmeida/frontend
+    ports:
+      - 8080:8080
+    stdin_open: true
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    networks:
+      - react-express
+
+networks:
+  react-express:

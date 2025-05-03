@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  test-backend:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,6 +36,6 @@ jobs:
       run: npm test
         
   docker:
-    needs: test
+    needs: test-backend
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
