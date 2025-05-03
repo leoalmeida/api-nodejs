@@ -34,7 +34,12 @@ jobs:
 
     - name: Test
       run: npm test
-        
+  
+  zap-scan:
+    needs: test-backend
+    uses: ./.github/workflows/zap_scan.yml
+    secrets: inherit
+
   docker:
     needs: test-backend
     uses: ./.github/workflows/Docker.yml
