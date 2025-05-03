@@ -1,7 +1,6 @@
 services:
   backend:
     restart: unless-stopped
-    env_file: .env
     environment:
       - DATABASE_URL=$DATABASE_URL
     build:
