@@ -44,3 +44,8 @@ jobs:
     needs: test-backend
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
+  
+  deploy_ecs:
+    needs: docker
+    uses: ./.github/workflows/ECS.yml
+    secrets: inherit
