@@ -17,7 +17,7 @@ jobs:
     - name: Subiar a aplicação de teste local
       run: docker compose up -d
     - name: ZAP Scan
-      uses: zaproxy/action-baseline@v0.14.0
+      uses: zaproxy/action-full-scan@v0.12.0
       env: 
           INSTANCE_IP: localhost
       with:
@@ -33,4 +33,4 @@ jobs:
       with:
         name: zap_report.html
         path: .
-        retention-days: 1
+        retention-days: 5
