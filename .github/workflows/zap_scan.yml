@@ -10,8 +10,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-          ref: master
     - name: Fazer Build da aplicação de teste
       run: docker compose build
     - name: Subiar a aplicação de teste local
