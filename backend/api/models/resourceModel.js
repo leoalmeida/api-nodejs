@@ -9,8 +9,8 @@ const schema = new Schema ({
     status :  { type: String, required: true },
     createdBy :  { type: String, required: true },
     createdAt :  { type: Date, required: true },
-    lastModifiedBy :  { type: String, required: true },
-    lastModifiedAt :  { type: Date, required: true }
+    lastModifiedBy :  { type: String, required: false },
+    lastModifiedAt :  { type: Date, required: false }
 });
 
 const model = mongoose.model('Resource', schema);

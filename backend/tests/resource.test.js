@@ -116,7 +116,7 @@ describe('Teste Resource model', () => {
         "createdBy": "admin",
         "createdAt": datenow.toISOString(),
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     };
 
     mockingoose(resource.model).toReturn(_res, 'create');
@@ -129,7 +129,7 @@ describe('Teste Resource model', () => {
           "createdBy": "admin",
           "createdAt": datenow.toISOString(),
           "lastModifiedBy": "",
-          "lastModifiedAt": ""
+          "lastModifiedAt": null
       })
       .then(res => {
         expect(JSON.parse(JSON.stringify(res))).toMatchObject(_res);

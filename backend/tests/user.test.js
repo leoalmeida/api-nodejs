@@ -16,7 +16,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": "2019-10-18T16:37:58.979Z",
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     },{
       "_id": "6815337537b4b6910eddec84",
         "name": "Cliente 252",
@@ -28,7 +28,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": "2019-10-18T16:37:58.979Z",
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     },{
       "_id": "6815337537b4b6910eddec85",
         "name": "Cliente 252",
@@ -40,7 +40,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": "2019-10-18T16:37:58.979Z",
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     }];
 
     mockingoose(user.model).toReturn(_users, 'find');
@@ -63,7 +63,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": "2019-10-18T16:37:58.979Z",
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     }
     ];
 
@@ -116,7 +116,7 @@ describe('Teste User model', () => {
         "createdBy": "admin",
         "createdAt": datenow.toISOString(),
         "lastModifiedBy": "",
-        "lastModifiedAt": ""
+        "lastModifiedAt": null
     };
 
     mockingoose(user.model).toReturn(_user, 'create');
@@ -132,38 +132,14 @@ describe('Teste User model', () => {
             "createdBy": "admin",
             "createdAt": datenow.toISOString(),
             "lastModifiedBy": "",
-            "lastModifiedAt": ""
+            "lastModifiedAt": null
         })
       .then(user => {
         expect(JSON.parse(JSON.stringify(user))).toMatchObject(_user);
       });
   });
   it('Deve remover o usuário selecionado', () => {
-    const _users = [{
-        "_id": "6815337537b4b6910eddec83",
-        "name": "Cliente 149501",
-        "birthDate": "1966-10-23T03:00:00Z",
-        "phone": "(32)11111111",
-        "email": "email@email.com.br",
-        "occupation": "Medico",
-        "state": "SP",
-        "createdBy": "admin",
-        "createdAt": "2019-10-18T16:37:58.979Z",
-        "lastModifiedBy": "",
-        "lastModifiedAt": ""
-    },{
-      "_id": "6815337537b4b6910eddec84",
-        "name": "Cliente 252",
-        "birthDate": "1989-10-23T03:00:00Z",
-        "phone": "(32)11111111",
-        "email": "email@email.com.br",
-        "occupation": "Analista de Sistemas",
-        "state": "SP",        
-        "createdBy": "admin",
-        "createdAt": "2019-10-18T16:37:58.979Z",
-        "lastModifiedBy": "",
-        "lastModifiedAt": ""
-    },{
+    const _user = [{
       "_id": "6815337537b4b6910eddec85",
         "name": "Cliente 252",
         "birthDate": "1989-10-23T03:00:00Z",
@@ -176,9 +152,9 @@ describe('Teste User model', () => {
         "lastModifiedBy": "",
         "lastModifiedAt": ""
     }];
-    mockingoose(user.model).toReturn(_users, 'findOneAndDelete');
+    mockingoose(user.model).toReturn(_user, 'findOneAndDelete');
 
-    return user.model.findOneAndDelete({ "_id": "6815337537b4b6910eddec88"})
+    return user.model.findOneAndDelete({ "_id": "6815337537b4b6910eddec85"})
       .then(user => {
         expect(JSON.parse(JSON.stringify(user))).toMatchObject(_user);
       });
