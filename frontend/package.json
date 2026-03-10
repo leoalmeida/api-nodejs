@@ -19,25 +19,24 @@
   },
   "homepage": "https://github.com/leoalmeida/api-nodejs#readme",
   "dependencies": {
-    "axios": "^1.13.5",
-    "bootstrap": "^5.3.5",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "sass": "^1.87.0"
+    "bootstrap": "^5.3.8",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sass": "^1.97.3"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.0.0",
+    "globals": "^16.5.0",
     "prettier": "^3.8.1",
     "react-scripts": "^5.0.1"
   },

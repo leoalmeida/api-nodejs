@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import './App.scss';
 import AddResource from './components/AddResource';
 import ResourceList from './components/ResourceList';
@@ -14,20 +13,33 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get('/api/v1')
+    fetch('/api/v1')
       .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
         this.setState({
-          resources: response.data.data,
+          resources: data.data,
         });
       })
       .catch((e) => console.log('Error : ', e));
   }
 
   handleAddResource = (value) => {
-    axios
-      .post('/api/v1/resource', {text: value})
-      .then(() => {
+    fetch('/api/v1/resource', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({text: value}),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
         this.setState({
           resources: [...this.state.resources, {text: value}],
         });
