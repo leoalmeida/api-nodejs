@@ -1,88 +1,130 @@
-# API Node.js
+# api-nodejs
 
-Este projeto é uma API desenvolvida em Node.js. Abaixo estão as instruções para configuração, execução e uso.
+[Português](README.md) | [English](README.en.md)
 
-## Pré-requisitos
+![Node.js](https://img.shields.io/badge/node.js-20%2B-339933)
+![React](https://img.shields.io/badge/react-19-61DAFB)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
 
-- [Node.js](https://nodejs.org/) instalado (versão 14 ou superior).
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/) instalado.
+Projeto com backend Node.js (Express + MongoDB) e frontend React.
 
-## Instalação
+## Sumario
 
-1. Clone o repositório:
-    ```bash
-    git clone https://github.com/seu-usuario/api-nodejs.git
-    cd api-nodejs
-    ```
+- [Visao Geral](#visao-geral)
+- [Requisitos](#requisitos)
+- [Estrutura](#estrutura)
+- [Backend](#backend)
+- [Frontend](#frontend)
+- [Docker](#docker)
+- [Troubleshooting](#troubleshooting)
 
-2. Instale as dependências:
-    ```bash
-    npm install
-    # ou
-    yarn install
-    ```
+## Visao Geral
 
-## Uso
+- `backend/`: API REST, Swagger, testes com Jest/Supertest
+- `frontend/`: aplicacao React consumindo a API
+- `docker-compose.yml` na raiz: sobe o backend + MongoDB
 
-### Executar em ambiente de desenvolvimento
+## Requisitos
 
-```bash
-npm run dev
-# ou
-yarn dev
-```
+- Node.js 20+
+- npm 10+
+- Docker (opcional)
 
-### Executar em ambiente de produção
+## Estrutura
 
-1. Compile o projeto:
-    ```bash
-    npm run build
-    # ou
-    yarn build
-    ```
-
-2. Inicie o servidor:
-    ```bash
-    npm start
-    # ou
-    yarn start
-    ```
-
-## Scripts Disponíveis
-
-- `dev`: Inicia o servidor em modo de desenvolvimento.
-- `build`: Compila o projeto para produção.
-- `start`: Inicia o servidor em modo de produção.
-
-## Estrutura do Projeto
-
-```plaintext
+```text
 api-nodejs/
-├── src/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── app.js
-├── tests/
-├── package.json
-└── README.md
+  backend/
+    api/
+    config/
+    tests/
+    server.js
+    swagger.js
+    package.json
+  frontend/
+    src/
+    public/
+    package.json
+  docker-compose.yml
+  README.md
 ```
 
-## Contribuição
+## Backend
 
-Contribuições são bem-vindas! Siga os passos abaixo:
+### Instalacao
 
-1. Faça um fork do projeto.
-2. Crie uma branch para sua feature:
-    ```bash
-    git checkout -b minha-feature
-    ```
-3. Commit suas alterações:
-    ```bash
-    git commit -m "Adiciona minha feature"
-    ```
-4. Envie para o repositório remoto:
-    ```bash
-    git push origin minha-feature
-    ```
-5. Abra um Pull Request.
+```powershell
+Set-Location "c:\Users\leo_a\projetos\api-nodejs\backend"
+npm install
+```
+
+### Execucao
+
+```powershell
+npm run dev
+```
+
+Por padrao, a API sobe na porta `3000` (`backend/config/default.json`).
+
+### Swagger
+
+Gerar/atualizar especificacao:
+
+```powershell
+npm run swagger
+```
+
+Documentacao da API:
+
+- `http://localhost:3000/docs`
+
+### Testes e qualidade
+
+```powershell
+npm test
+npm run test:unit
+npm run test:integration
+npm run lint
+npm run lint:fix
+npm run format
+```
+
+## Frontend
+
+### Instalacao
+
+```powershell
+Set-Location "c:\Users\leo_a\projetos\api-nodejs\frontend"
+npm install
+```
+
+### Execucao
+
+```powershell
+npm start
+```
+
+O frontend usa proxy para `http://localhost:3000` (configurado no `frontend/package.json`).
+
+### Testes e build
+
+```powershell
+npm test -- --watchAll=false
+npm run build
+npm run format
+```
+
+## Docker
+
+Subir backend + MongoDB pela raiz:
+
+```powershell
+Set-Location "c:\Users\leo_a\projetos\api-nodejs"
+docker compose up --build
+```
+
+## Troubleshooting
+
+- API nao conecta no banco: valide `DATABASE_URL` e parametros em `backend/config/default.json`.
+- Frontend nao encontra API: confirme backend em `localhost:3000` e proxy do React.
+- Erro em `npm test` no frontend: execute com `--watchAll=false` em ambiente nao interativo.
