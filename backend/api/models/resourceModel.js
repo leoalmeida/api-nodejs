@@ -1,16 +1,16 @@
-// Definição de um modelo de Recurso 
+// Definição de um modelo de Recurso
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const schema = new Schema ({
-    name : { type: String, required: true },
-    type : { type: String, required: true },
-    location :  { type: String, required: false },
-    status :  { type: String, required: true },
-    createdBy :  { type: String, required: true },
-    createdAt :  { type: Date, required: true },
-    lastModifiedBy :  { type: String, required: false },
-    lastModifiedAt :  { type: Date, required: false }
+const schema = new Schema({
+  name: { type: String, required: true },
+  type: { type: String, required: true },
+  location: { type: String, required: false },
+  status: { type: String, required: true },
+  createdBy: { type: String, required: true },
+  createdAt: { type: Date, required: true },
+  lastModifiedBy: { type: String, required: false },
+  lastModifiedAt: { type: Date, required: false },
 });
 
 const model = mongoose.model('Resource', schema);

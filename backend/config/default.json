@@ -1,12 +1,12 @@
 {
-    "server": {
-        "port" : 3000,
-        "db" : {
-            "url": "mongodb+srv://api-nodejs:/db?retryWrites=true&w=majority&appName=",
-            "username": "api-nodejs",
-            "password": "",
-            "hostname": "",
-            "db": "db"
-        }
+  "server": {
+    "port": 3000,
+    "db": {
+      "url": "mongodb+srv://api-nodejs:/db?retryWrites=true&w=majority&appName=",
+      "username": "api-nodejs",
+      "password": "",
+      "hostname": "",
+      "db": "db"
     }
+  }
 }

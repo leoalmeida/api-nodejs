@@ -1,0 +1,116 @@
+name: Script de workflow para o Frontend do projeto
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+   code-quality-frontend:
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./fropackage-lock.json
+
+         - name: Install Dependencies
+           working-directory: frontend
+           run: npm ci
+
+         - name: Run Prettier check to ensure code formatting
+           working-directory: frontend
+           run: npm run prettier
+
+         - name: Run ESLint check to ensure code quality
+           working-directory: frontend
+           run: npm run lint -- --fix
+
+
+   testes-frontend:
+      needs: [code-quality-frontend]
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./frontend/package-lock.json
+
+         - name: Install Dependencies
+           working-directory: frontend
+           run: npm ci
+
+         - name: Run Frontend Tests
+           working-directory: frontend
+           run: npm test -- --watch=false --browsers=ChromeHeadless
+
+
+
+   build-frontend:
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./frontend/package-lock.json
+
+         - name: Install Dependencies
+           working-directory: frontend
+           run: npm ci
+
+         - name: Build Angular Application
+           working-directory: frontend
+           run: npm run build
+
+         - name: Upload Frontend Artifact
+           uses: actions/upload-artifact@v6
+           with:
+              name: frontend-dist
+              path: ./frontend/dist/
+              retention-days: 1
+
+
+   #zap-scan:
+   #   needs: test-frontend
+   #   uses: ./.github/workflows/zap_scan.yml
+   #   secrets: inherit
+
+   #docker:
+   #   needs: test-frontend
+   #   uses: ./.github/workflows/Docker.yml
+   #   secrets: inherit
+  
+   #deploy_ecs:
+   #   needs: docker
+   #   uses: ./.github/workflows/ECS.yml
+   #   secrets: inherit
+
+   #deploy_google:
+   #  needs: docker
+   #  uses: ./.github/workflows/release-gcloud.yml
+   #  secrets: inherit

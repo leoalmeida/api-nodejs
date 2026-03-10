@@ -1,0 +1,118 @@
+name: Script de workflow para o Frontend do projeto
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+   code-quality-backend:
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./package-lock.json
+
+         - name: Install Dependencies
+           working-directory: backend
+           run: npm ci
+
+         - name: Run Prettier check to ensure code formatting
+           working-directory: backend
+           run: npm run prettier
+
+         - name: Run ESLint check to ensure code quality
+           working-directory: backend
+           run: npm run lint -- --fix
+
+   testes-backend:
+      needs: [code-quality-backend]
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./backend/package-lock.json
+
+         - name: Install Dependencies
+           working-directory: backend
+           run: npm ci
+
+         - name: Run Backend Unit Tests
+           working-directory: backend
+           run: npm run test:unit
+         
+         - name: Run Backend integration Tests
+           working-directory: backend
+           run: npm run test:integration
+
+
+   build-backend:
+      runs-on: ubuntu-latest # Use the latest Ubuntu runner
+      strategy:
+         matrix:
+            node-version: [24]
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v6 # Action to checkout your repository code
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v6
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+              cache-dependency-path: ./package-lock.json
+
+         - name: Install Dependencies
+           working-directory: backend
+           run: npm ci
+
+         - name: Build Backend Application
+           working-directory: backend
+           run: npm run build
+
+         - name: Upload Backend Artifact
+           uses: actions/upload-artifact@v6
+           with:
+              name: backend-dist
+              path: ./backend/dist/
+              retention-days: 1
+
+
+   #zap-scan:
+   #   needs: test-backend
+   #   uses: ./.github/workflows/zap_scan.yml
+   #   secrets: inherit
+
+   #docker:
+   #   needs: test-backend
+   #   uses: ./.github/workflows/Docker.yml
+   #   secrets: inherit
+  
+   #deploy_ecs:
+   #   needs: docker
+   #   uses: ./.github/workflows/ECS.yml
+   #   secrets: inherit
+
+   #deploy_google:
+   #  needs: docker
+   #  uses: ./.github/workflows/release-gcloud.yml
+   #  secrets: inherit

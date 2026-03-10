@@ -222,10 +222,7 @@
             "example": "Jhon Doe"
           }
         },
-        "required": [
-          "id",
-          "name"
-        ]
+        "required": ["id", "name"]
       },
       "resource": {
         "type": "object",
@@ -263,11 +260,7 @@
       },
       "statusEnum": {
         "type": "string",
-        "enum": [
-          "running",
-          "stopped",
-          "failed"
-        ]
+        "enum": ["running", "stopped", "failed"]
       }
     },
     "securitySchemes": {

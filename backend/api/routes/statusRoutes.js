@@ -18,13 +18,10 @@ const statusController = require('../controllers/statusController');
 // Rotas para operações de gestão de status dos recursos
 
 // Status api route.
-router.route("/status")
-    .get(statusController.listarItems);
+router.route('/status').get(statusController.listarItems);
 
-router.route('/status/:id')
-    .get(statusController.getOneItem);
+router.route('/status/:id').get(statusController.getOneItem);
 
-router.route('/status/:id/:status')  
-    .put(statusController.updateItem)
+router.route('/status/:id/:status').put(statusController.updateItem);
 
 module.exports = router;

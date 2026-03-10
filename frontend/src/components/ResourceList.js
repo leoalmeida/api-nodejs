@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default class ResourceList extends React.Component {
   constructor(props) {
@@ -21,8 +21,8 @@ export default class ResourceList extends React.Component {
         {resources.map((resource, i) => (
           <li
             className={
-              "list-group-item cursor-pointer " +
-              (i === this.state.activeIndex ? "active" : "")
+              'list-group-item cursor-pointer ' +
+              (i === this.state.activeIndex ? 'active' : '')
             }
             key={i}
             onClick={() => {
@@ -37,7 +37,7 @@ export default class ResourceList extends React.Component {
   }
 
   render() {
-    let { resources } = this.props;
+    let {resources} = this.props;
     return resources.length > 0 ? (
       this.renderResources(resources)
     ) : (

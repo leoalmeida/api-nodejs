@@ -1,18 +1,18 @@
-// Definição de um modelo de Usuário 
+// Definição de um modelo de Usuário
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const schema = new Schema ({
-    name : { type: String, required: true },
-    birthDate :  { type: String, required: false },
-    phone :  { type: String, required: false },
-    email :  { type: String, required: false },
-    occupation :  { type: String, required: false },
-    state :  { type: String, required: false },
-    createdBy :  { type: String, required: true },
-    createdAt :  { type: Date, required: true },
-    lastModifiedBy :  { type: String, required: false },
-    lastModifiedAt :  { type: Date, required: false }
+const schema = new Schema({
+  name: { type: String, required: true },
+  birthDate: { type: String, required: false },
+  phone: { type: String, required: false },
+  email: { type: String, required: false },
+  occupation: { type: String, required: false },
+  state: { type: String, required: false },
+  createdBy: { type: String, required: true },
+  createdAt: { type: Date, required: true },
+  lastModifiedBy: { type: String, required: false },
+  lastModifiedAt: { type: Date, required: false },
 });
 const model = mongoose.model('User', schema);
 
@@ -49,7 +49,6 @@ const model = mongoose.model('User', schema);
         "createdAt": new Date()
     }).then(() => console.log('user3'));
 });*/
-
 
 // Exportando o model utilizado pelos controllers
 module.exports = { model, schema };

@@ -4,10 +4,14 @@
   "description": "Example of routes",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test && jest",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
     "lint": "eslint api",
+    "lint:fix": "eslint --fix .",
     "dev": "NODE_ENV=development && node server.js",
-    "swagger": "node --env-file=.env swagger.js"
+    "swagger": "node --env-file=.env swagger.js",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "jest": {
     "testEnvironment": "node",
@@ -36,10 +40,13 @@
   "devDependencies": {
     "@eslint/js": "^9.25.1",
     "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "globals": "^16.0.0",
     "jest": "^29.7.0",
     "mockingoose": "^2.16.2",
     "nodemon": "^3.1.10",
+    "prettier": "^3.8.1",
     "supertest": "^7.1.0",
     "swagger-autogen": "^2.23.7"
   }

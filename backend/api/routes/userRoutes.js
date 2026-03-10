@@ -19,15 +19,15 @@ const userController = require('../controllers/userController');
 // Rotas para operações CRUD de recursos
 
 // User api route.
-router.route("/user")
-    .get(userController.listarItems)
-    .post(userController.saveItem);
+router
+  .route('/user')
+  .get(userController.listarItems)
+  .post(userController.saveItem);
 
-router.route('/user/:id')
-    .delete(userController.removeItem)
-    .put(userController.updateItem)
-    .get(userController.getOneItem);
-
+router
+  .route('/user/:id')
+  .delete(userController.removeItem)
+  .put(userController.updateItem)
+  .get(userController.getOneItem);
 
 module.exports = router;
-

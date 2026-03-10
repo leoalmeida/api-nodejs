@@ -1,8 +1,8 @@
-const express    = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
-const config = require('config')
+const config = require('config');
 const db = require('./db');
 
 // Inicializando a aplicação Express
@@ -19,12 +19,13 @@ app.set('db_url', process.env.DATABASE_URL || config.get('server.db.url'));
 
 db.connect(app.get('db_url'));
 
+// Parse do corpo das requisições antes das rotas para POST/PUT/PATCH.
+app.use(bodyParser.json());
+
 // Configurando as rotas disponibilizadas pela aplicação
 app.use('/api/v1', resourceRoutes);
 app.use('/api/v1', statusRoutes);
 app.use('/api/v1', userRoutes);
-
-app.use(bodyParser.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 module.exports = app;

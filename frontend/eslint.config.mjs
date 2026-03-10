@@ -9,4 +9,5 @@ export default defineConfig([
   { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
   { files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions: { globals: {...globals.browser, ...globals.node} } },
   pluginReact.configs.flat.recommended,
+  { "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"]}
 ]);

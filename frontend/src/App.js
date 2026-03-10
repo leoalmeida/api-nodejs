@@ -1,8 +1,8 @@
-import React from "react";
-import axios from "axios";
-import "./App.scss";
-import AddResource from "./components/AddResource";
-import ResourceList from "./components/ResourceList";
+import React from 'react';
+import axios from 'axios';
+import './App.scss';
+import AddResource from './components/AddResource';
+import ResourceList from './components/ResourceList';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,24 +15,24 @@ export default class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/v1")
+      .get('/api/v1')
       .then((response) => {
         this.setState({
           resources: response.data.data,
         });
       })
-      .catch((e) => console.log("Error : ", e));
+      .catch((e) => console.log('Error : ', e));
   }
 
   handleAddResource = (value) => {
     axios
-      .post("/api/v1/resource", { text: value })
+      .post('/api/v1/resource', {text: value})
       .then(() => {
         this.setState({
-          resources: [...this.state.resources, { text: value }],
+          resources: [...this.state.resources, {text: value}],
         });
       })
-      .catch((e) => console.log("Error : ", e));
+      .catch((e) => console.log('Error : ', e));
   };
 
   render() {

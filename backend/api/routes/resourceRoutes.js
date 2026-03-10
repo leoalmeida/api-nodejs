@@ -19,13 +19,15 @@ const router = express.Router();
 const resourceController = require('../controllers/resourceController');
 
 // Rotas para operações CRUD de recursos
-router.route("/resource")
-    .get(resourceController.listarItems)
-    .post(resourceController.saveItem);
+router
+  .route('/resource')
+  .get(resourceController.listarItems)
+  .post(resourceController.saveItem);
 
-router.route('/resource/:id')
-    .delete(resourceController.removeItem)
-    .put(resourceController.updateItem)
-    .get(resourceController.getOneItem);
+router
+  .route('/resource/:id')
+  .delete(resourceController.removeItem)
+  .put(resourceController.updateItem)
+  .get(resourceController.getOneItem);
 
 module.exports = router;
